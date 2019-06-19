@@ -485,7 +485,7 @@ def isValidRecursiveSlugsProperty(tokens):
 def performConversion(inputFile,thoroughly):
     specFile = open(inputFile,"r")
     mode = ""
-    lines = {"[ENV_TRANS]":[],"[ENV_INIT]":[],"[INPUT]":[],"[OUTPUT]":[],"[SYS_TRANS]":[],"[SYS_INIT]":[],"[ENV_LIVENESS]":[],"[SYS_LIVENESS]":[],"[OBSERVABLE_INPUT]":[],"[UNOBSERVABLE_INPUT]":[],"[CONTROLLABLE_INPUT]":[] }
+    lines = {"[ENV_TRANS]":[],"[ENV_INIT]":[],"[INPUT]":[],"[OUTPUT]":[],"[SYS_TRANS]":[],"[SYS_INIT]":[],"[ENV_LIVENESS]":[],"[SYS_LIVENESS]":[],"[OBSERVABLE_INPUT]":[],"[UNOBSERVABLE_INPUT]":[],"[CONTROLLABLE_INPUT]":[],"[SYS_TRANS_HARD]":[] }
 
     for line in specFile.readlines():
         line = line.strip()
@@ -602,7 +602,7 @@ def performConversion(inputFile,thoroughly):
     # ---------------------------------------    
     # Go through the properties and translate
     # ---------------------------------------    
-    for propertyType in ["[ENV_TRANS]","[ENV_INIT]","[SYS_TRANS]","[SYS_INIT]","[ENV_LIVENESS]","[SYS_LIVENESS]"]:
+    for propertyType in ["[ENV_TRANS]","[ENV_INIT]","[SYS_TRANS]","[SYS_TRANS_HARD]","[SYS_INIT]","[ENV_LIVENESS]","[SYS_LIVENESS]"]:
         if len(lines[propertyType])>0:
             print propertyType
 

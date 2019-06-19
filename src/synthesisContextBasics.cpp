@@ -162,6 +162,8 @@ void GR1Context::init(std::list<std::string> &filenames) {
                     readMode = 6;
                 } else if (currentLine=="[SYS_LIVENESS]") {
                     readMode = 7;
+                } else if (currentLine=="[SYS_TRANS_HARD]"){
+                  readMode = 5;
                 } else {
                     std::cerr << "Sorry. Didn't recognize category " << currentLine << "\n";
                     throw "Aborted.";
