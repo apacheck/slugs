@@ -136,7 +136,7 @@ void GR1Context::init(std::list<std::string> &filenames) {
     initSys = mgr.constantTrue();
     safetyEnv = mgr.constantTrue();
     safetySys = mgr.constantTrue();
-    
+
     // The readmode variable stores in which chapter of the input file we are
     int readMode = -1;
     std::string currentLine;
@@ -164,6 +164,10 @@ void GR1Context::init(std::list<std::string> &filenames) {
                     readMode = 7;
                 } else if (currentLine=="[SYS_TRANS_HARD]"){
                   readMode = 5;
+                } else if (currentLine=="[ENV_TRANS_HARD]"){
+                  readMode = 4;
+                } else if (currentLine=="[CHANGE_CONS]"){
+                  readMode = 8;
                 } else {
                     std::cerr << "Sorry. Didn't recognize category " << currentLine << "\n";
                     throw "Aborted.";
@@ -211,6 +215,8 @@ void GR1Context::init(std::list<std::string> &filenames) {
                     allowedTypes.insert(PostInput);
                     allowedTypes.insert(PostOutput);
                     livenessGuarantees.push_back(parseBooleanFormula(currentLine,allowedTypes));
+                } else if (readMode==8){
+                  continue;
                 } else {
                     std::cerr << "Error with line " << lineNumberCurrentlyRead << "!";
                     throw "Found a line in the specification file that has no proper categorial context.";
@@ -228,4 +234,3 @@ void GR1Context::init(std::list<std::string> &filenames) {
     if (livenessAssumptions.size()==0) livenessAssumptions.push_back(mgr.constantTrue());
     if (livenessGuarantees.size()==0) livenessGuarantees.push_back(mgr.constantTrue());
 }
-
